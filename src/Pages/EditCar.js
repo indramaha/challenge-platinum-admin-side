@@ -72,7 +72,7 @@ const EditCar = () => {
             .catch((err) => console.log(err.message))
     }
     return (
-        <SideBar>
+        <SideBar isDboardActive={false} isCars={true}>
             <div className="editcar-section">
                 <div>
                     <div className="editcar-breadcrumb">
