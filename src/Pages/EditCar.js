@@ -162,10 +162,14 @@ const EditCar = () => {
                 </div>
                 <div className="editcar-btn">
                     <div className="editcar-btn-cancel">
+                        <Link to={`/list-car/`}> 
                         <button>Cancel</button>
+                        </Link>
                     </div>
                     <div className="editcar-btn-save">
+                        
                         <button onClick={handleSaveEditBtn}>Save</button>
+                        
                     </div>
                 </div>
             </div>
