@@ -10,6 +10,8 @@ import SideBar from "../Components/SideBar";
 import { Link } from "react-router-dom";
 import "./ListCar.css"
 import { Breadcrumb, Button } from 'react-bootstrap';
+import { convertToRupiah } from '../utils/convertRupiah';
+
 
 
 const ListCar = () => {
@@ -93,7 +95,7 @@ return (
                                     <p className="discovery-card-name-p">{item.name}</p>
                                 </div>
                                 <div>
-                                    <p className="discovery-card-price-p">Rp {item.price} / hari</p>
+                                    <p className="discovery-card-price-p">Rp {convertToRupiah(item.price)} / hari</p>
                                 </div>
                                 
                                 <div className="discovery-card-category">

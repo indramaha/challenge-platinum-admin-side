@@ -5,6 +5,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import SideBar from "../Components/SideBar";
+import { Button } from "react-bootstrap";
 
 const EditCar = () => {
     const [name, setName] = useState("")
@@ -32,22 +33,7 @@ const EditCar = () => {
         setCategory(e.target.value)
     }
 
-    // useEffect(() => {
-    //     const token = localStorage.getItem("token")
-    //     const config = {
-    //         headers : {
-    //             access_token: token
-    //         },
-    //     }
-
-    //     axios
-    //         .get(`https://bootcamp-rent-cars.herokuapp.com/admin/car/${id}`, config)
-    //         .then((ress) => {
-    //             setCar(ress.data)
-    //             console.log(ress.data)
-    //         })
-    //         .catch((err) => console.log(err.message))
-    // },[id])
+ 
 
     const handleSaveEditBtn = () => {
         const token = localStorage.getItem("token")
@@ -67,10 +53,36 @@ const EditCar = () => {
             .put(`https://bootcamp-rent-cars.herokuapp.com/admin/car/${id}`, formData, config)
             .then((ress) => {
                 // console.log(ress)
-                navigate("/cars")
+                navigate("/list-car")
             })
             .catch((err) => console.log(err.message))
-    }
+    };
+
+    useEffect(() => {
+        getData();
+       }, []);
+
+    const getData = () => {
+        const token =localStorage.getItem("token");
+    
+        const config = {
+            headers: {
+                access_token: token,
+            },
+        };
+    
+        axios
+            .get(`https://bootcamp-rent-cars.herokuapp.com/admin/car/${id}`, config)
+            .then((res) => {
+                setCar(res.data);
+            })
+            .catch((err) => console.log(err))
+    
+       };
+    
+    const waktuCreate = new Date(car.createdAt).toLocaleDateString()
+    const waktuUpdate = new Date(car.updatedAt).toLocaleDateString()
+
     return (
         <SideBar isDboardActive={false} isCars={true}>
             <div className="editcar-section">
@@ -104,7 +116,7 @@ const EditCar = () => {
                                     <p>Nama/Tipe Mobil*</p>
                                 </div>
                                 <div className="editcar-inputsection-form-input-bg">
-                                    <input placeholder={car.name} defaultValue={car.name} type="text" onChange={handleName} required/>
+                                    <input onChange={handleName} defaultValue={car.name}/>
                                 </div>
                             </div>
                             <div className="editcar-inputsection-form">
@@ -135,26 +147,26 @@ const EditCar = () => {
                                 <div className="editcar-inputsection-form-select-bg">
                                     <Form.Select onChange={handleCategory}>
                                         <option value="">Pilih Kategori Mobil</option>
-                                        <option value="small">2 - 4 people</option>
-                                        <option value="Medium">4 - 6 people</option>
-                                        <option value="large">6 - 8 people</option>
+                                        <option selected={car.category==='small'} value="small">2 - 4 orang</option>
+                                        <option selected={car.category==='Medium'} value="Medium">4 - 6 orang</option>
+                                        <option selected={car.category==='large'} value="large">6 - 8 orang</option>
                                     </Form.Select>
                                 </div>
                             </div>
                             <div className="editcar-inputsection-form">
                                 <div className="editcar-inputsection-form-title">
-                                    <p>Created at</p>
+                                    <p>Created at </p>
                                 </div>
                                 <div className="editcar-inputsection-form-date">
-                                    <p>-</p>
+                                    <p>{waktuCreate}</p>
                                 </div>
                             </div>
                             <div className="editcar-inputsection-form">
                                 <div className="editcar-inputsection-form-title">
-                                    <p>Updated at</p>
+                                    <p>Updated at </p>
                                 </div>
                                 <div className="editcar-inputsection-form-date">
-                                    <p>-</p>
+                                    <p>{waktuUpdate}</p>
                                 </div>
                             </div>
                         </div>
@@ -168,7 +180,7 @@ const EditCar = () => {
                     </div>
                     <div className="editcar-btn-save">
                         
-                        <button onClick={handleSaveEditBtn}>Save</button>
+                        <Button onClick={handleSaveEditBtn}>Save</Button>
                         
                     </div>
                 </div>
