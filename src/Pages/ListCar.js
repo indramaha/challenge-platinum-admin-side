@@ -13,7 +13,6 @@ import { Breadcrumb, Button } from 'react-bootstrap';
 import { convertToRupiah } from '../utils/convertRupiah';
 
 
-
 const ListCar = () => {
     const [car, setCar] = useState([])
     const [err, setError] = useState ()
@@ -55,6 +54,39 @@ const ListCar = () => {
                 setError(error.response.data.message)
                 }
             }
+    
+    //Fungsi Kategori Small//
+    const handleClickFilterSmall = () => {
+        axios
+        .get(`https://bootcamp-rent-cars.herokuapp.com/customer/v2/car?category=small`)
+        .then ( (res) => {
+            setCar(res.data.cars);
+        })
+        .catch((err) => console.log (err.message))
+    }
+
+      //Fungsi Kategori Medium//
+      const handleClickFilterMedium = () => {
+        axios
+        .get(`https://bootcamp-rent-cars.herokuapp.com/customer/v2/car?category=Medium`)
+        .then ( (res) => {
+            setCar(res.data.cars);
+        })
+        .catch((err) => console.log (err.message))
+    }
+
+       //Fungsi Kategori Large//
+       const handleClickFilterLarge = () => {
+        axios
+        .get(`https://bootcamp-rent-cars.herokuapp.com/customer/v2/car?category=large`)
+        .then ( (res) => {
+            setCar(res.data.cars);
+        })
+        .catch((err) => console.log (err.message))
+    }
+
+
+    
 
 
 return (  
@@ -70,16 +102,16 @@ return (
         </div>
         <div className='list-car-button-category'>
             <div> 
-                <Button> ALL </Button>
+                <Button onClick={getData}> ALL </Button>
             </div>
             <div> 
-                <Button> 2-3 people </Button>
+                <Button onClick={handleClickFilterSmall} > 2-3 people </Button>
             </div>
             <div> 
-                <Button> 4-6 people </Button>
+                <Button onClick={handleClickFilterMedium}> 4-6 people </Button>
             </div>
             <div> 
-                <Button> 6-8 people </Button>
+                <Button onClick={handleClickFilterLarge}> 6-8 people </Button>
             </div>
         </div>
 
