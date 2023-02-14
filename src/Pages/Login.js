@@ -1,9 +1,9 @@
-const Login = () => {
-    return (  
-        <div>
-            <h1>testinglogin</h1>
-        </div>
-    );
-}
+// const Login = () => {
+//     return (  
+//         <div>
+//             <h1>testinglogin</h1>
+//         </div>
+//     );
+// }
  
-export default Login;
+// export default Login;
