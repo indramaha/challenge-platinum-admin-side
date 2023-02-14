@@ -1,9 +1,13 @@
-const Login = () => {
+import LoginAdmin from "../Components/loginAdmin";
+
+
+const LoginPage = () => {
     return (  
         <div>
-            <h1>testinglogin</h1>
+            <LoginAdmin />
+            <h1>ini loginnya</h1>
         </div>
     );
 }
  
-export default Login;
+export default LoginPage;
