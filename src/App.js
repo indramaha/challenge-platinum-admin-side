@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import Login from './Pages/Login';
 import AddCar from './Pages/AddCar';
 import EditCar from './Pages/EditCar';
+import Dashboard from './Pages/Dashboard';
 
 const App = () => {
   return (
@@ -10,6 +11,7 @@ const App = () => {
       <Route path='/admin-login' element={<Login />}/>
       <Route path='/add-new-car' element={<AddCar />} />
       <Route path='/edit-car' element={<EditCar />} />
+      <Route path='/dashboard' element={<Dashboard />} />
     </Routes>
   );
 }
