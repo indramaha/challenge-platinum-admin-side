@@ -12,6 +12,7 @@ const App = () => {
       <Route path='/add-new-car' element={<AddCar />} />
       <Route path='/edit-car/:id' element={<EditCar />} />
       <Route path='/list-car' element={<ListCar/>} />
+      
     </Routes>
   );
 }
