@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { handleCheckToken } from "../redux/actions/authAction";
 import { Navigate, Outlet } from "react-router-dom";
+import { handleCheckToken } from "../redux/action/authAction";
 
 const ProtectedRoute = () => {
     const state = useSelector((rootReducers) => rootReducers)
-    // console.log(state)
+    console.log("hasil state",state)
 
     const dispatch = useDispatch()
 
@@ -18,7 +18,7 @@ const ProtectedRoute = () => {
         return("loading...")
     }
 
-    return state.auth.isLogin ? <Outlet /> : <Navigate to={'/login'} />
+    return state.auth.isLogin ? <Outlet /> : <Navigate to={'/'} />
 }
 
 export default ProtectedRoute;
