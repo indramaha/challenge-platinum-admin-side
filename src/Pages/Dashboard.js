@@ -32,14 +32,26 @@ const Dashboard = () => {
     })
 
     useEffect(() => {
+        handelData();
+    }, [])
+
+    const handelData = () => {
+        const token = localStorage.getItem('token')
+        const config = {
+            headers: {
+                access_token: token,
+            }
+        }
         axios
-            .get("https://bootcamp-rent-cars.herokuapp.com/admin/v2/order?sort=created_at%3Adesc")
+            .get("https://bootcamp-rent-cars.herokuapp.com/admin/v2/order?sort=created_at%3Adesc&page=1&pageSize=10", config)
             .then((res) => {
-                console.log(res);
-                setCardata(res.data.cars);
+                console.log(res.data.orders);
+                setCardata(res.data.orders);
             })
             .catch((err) => console.log(err.massage));
-    }, [])
+    }
+
+   
 
     return (
         <SideBar>
@@ -60,20 +72,20 @@ const Dashboard = () => {
             <div className="editcar-title">
                 <h4>Rented Car Data Visualization</h4>
             </div>
-            
+
 
             <div className="month">
                 <p>Month</p>
                 <div className="butn">
-                    <div class="dropdown">
-                        <a class="btn dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div className="dropdown">
+                        <a className="btn dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             June - 2022
                         </a>
 
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <ul className="dropdown-menu">
+                            <li><a className="dropdown-item" href="#">Action</a></li>
+                            <li><a className="dropdown-item" href="#">Another action</a></li>
+                            <li><a className="dropdown-item" href="#">Something else here</a></li>
                         </ul>
                     </div>
                     <button>Go</button>
@@ -95,37 +107,95 @@ const Dashboard = () => {
 
             <div className="table">
                 <table>
-                    <tr>
-                        <th>No</th>
-                        <th>User Email</th>
-                        <th>Car</th>
-                        <th>Start Rent</th>
-                        <th>Finish Rent</th>
-                        <th>Price</th>
-                        <th>Category</th>
-                    </tr>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>User Email</th>
+                            <th>Car</th>
+                            <th>Start Rent</th>
+                            <th>Finish Rent</th>
+                            <th>Price</th>
+                            <th>Category</th>
+                        </tr>
+                    </thead>
 
                     {
-                        !!carData.length
-                            ? carData.map((val, key) => {
-                                return (
-                                    <tr key={key}>
+                        !!carData.length ? carData.map((val, key) => {
+                            return (
+                                <tbody key={key}>
+                                    <tr >
                                         <td>{val.id}</td>
-                                        <td>{val.email}</td>
-                                        <td>{val.name}</td>
+                                        <td>{val.User.email}</td>
+                                        <td>{val.Car?.name}</td>
                                         <td>{val.start_rent_at}</td>
                                         <td>{val.finish_rent_at}</td>
-                                        <td>{val.price}</td>
-                                        <td>{val.category}</td>
+                                        <td>{val.Car?.price}</td>
+                                        <td>{val.Car?.category}</td>
                                     </tr>
-                                )
-                            }) : null
+                                </tbody>
+
+                            )
+                        }) : null
                     }
 
                 </table>
             </div>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination position-absolute top-100 start-50 translate-middle">
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div className="pagein">
+                <div className="limit">
+            <label>Limit</label>
+            <div class="dropdown">
+                <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    10
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+            </div>
+            </div>
+
+            <div className="jump">
+            <label>Jump to page</label>
+            <div class="dropdown">
+                <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    10
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+            </div>
+            </div>
+
+            <div className="go">
+            <button>Go</button>
+            </div>
+            </div>
 
         </SideBar>
+
+        
+        
     );
 }
 
