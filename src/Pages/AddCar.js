@@ -48,7 +48,7 @@ const AddCar = () => {
             .post(API.POST_NEW_CAR, formData, config)
             .then((ress) => {
                 // console.log(ress)
-                navigate("/cars")
+                navigate("/list-car")
             })
             .catch((err) => console.log(err.message))
     }
@@ -143,7 +143,9 @@ const AddCar = () => {
                 </div>
                 <div className="addcar-btn">
                     <div className="addcar-btn-cancel">
+                        <Link to={'/list-car'}>
                         <button>Cancel</button>
+                        </Link>
                     </div>
                     <div className="addcar-btn-save">
                         <button onClick={handleSaveBtn}>Save</button>
