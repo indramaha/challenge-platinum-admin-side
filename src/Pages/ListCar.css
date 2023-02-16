@@ -1,0 +1,162 @@
+.discovery-card-bg {
+    width: 1101px;
+    justify-content: center;
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-right: auto;
+    padding-top: 24px;
+}
+
+.discovery-card {
+    width: 351px;
+    height: 482px;
+    padding: 24px;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+    background: #FFFFFF;
+}
+
+.discovery-card-img-bg {
+    display: flex;
+    justify-content: center;
+}
+
+.discovery-card-img {
+    width: 270px;
+    height: 160px;
+}
+
+.discovery-card-name-p {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    padding-top: 47px;
+}
+
+.discovery-card-price-p {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    padding-top: 8px;
+}
+
+.discovery-card-category {
+    padding-top: 10px;
+    display: flex;
+    gap: 5px;
+}
+
+
+.discovery-card-button-bg {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 24px;
+}
+
+.discovery-card-button-delete {
+    padding: 14px 35px ;
+    border: 1px solid #FA2C5A;
+    background-color: white;
+    color: rgba(250, 44, 90, 1);
+    width: 143.5px;
+    height: 48px;
+    
+    font-family: 'Arial';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+
+.discovery-card-button-edit {
+    padding: 14px 35px ;
+    background: #5CB85F;
+    border-radius: 2px;
+    color: white;
+    border: none;
+    width: 143.5px;
+    height: 48px;
+
+    font-family: 'Arial';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.simbol-waktu {
+    width: 16.67px;
+    height: 16.67px;
+}
+
+.discovery-card-waktu-update {
+    display: flex;
+    gap: 5px;
+    padding-top: 12px;
+}
+
+.simbol-user {
+    width: 16.67px;
+    height: 16.67px;
+}
+
+.judul-list-car {
+    padding-top: 27px;
+    justify-content: space-between;
+    display: flex;
+    margin-right: 30px;
+}
+
+.judul-list-car button {
+    width: 142px;
+    height: 36px;
+    background: #0D28A6;
+    border-radius: 2px;
+    font-family: 'Arial';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    color: #FFFFFF;
+
+}
+
+.judul-list-car-card {
+    font-family: 'Arial';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 30px;
+    
+}
+
+.list-car-button-category {
+    display: flex;
+    gap: 18px;
+    padding-top: 24px;
+}
+
+.list-car-button-category button {
+    background: rgba(255, 255, 255, 1);
+    border-color: rgba(174, 183, 225, 1);
+    color: rgba(174, 183, 225, 1);  
+    border: 1px solid #AEB7E1;
+    border-radius: 8px;
+
+    font-family: 'Arial';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+
+
+
+
+
+
+
