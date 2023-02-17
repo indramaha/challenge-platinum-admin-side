@@ -1,0 +1,51 @@
+
+.table {
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    margin: 12px;
+  }
+    
+  table {
+    border: 2px solid black;
+    width: 800px;
+    height: 200px;
+  }
+    
+  th {
+    border-bottom: 1px solid black;
+    text-align: center;
+  }
+    
+  td {
+    text-align: center;
+    width: 50px;
+  }
+
+  .butn{
+    display: flex;
+  }
+
+  button{
+    background-color: blue;
+    border-radius: 5px;
+    border: none;
+    color: white;
+  }
+
+  .btn{
+    background-color: white;
+  }
+
+  .pagein{
+    display: flex;
+    gap: 2rem;
+  }
+
+  .go{
+    margin-top: 1rem;
+  }
+
+  

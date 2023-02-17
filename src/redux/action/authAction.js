@@ -11,23 +11,23 @@ export const handleCheckToken = () => dispatch => {
                 }
             })
 
-    // if(!token){
-    //     dispatch({
-    //         type: "CHECK_TOKEN",
-    //         payload: {
-    //             isLogin: false,
-    //             loading: false,
-    //         },
-    //     })
-    // } else {
-    //     dispatch({
-    //         type: "CHECK_TOKEN",
-    //         payload: {
-    //             isLogin: true,
-    //             loading: false,
-    //         },
-    //     })
-    // }
+    if(!token){
+        dispatch({
+            type: "CHECK_TOKEN",
+            payload: {
+                isLogin: false,
+                loading: false,
+            },
+        })
+    } else {
+        dispatch({
+            type: "CHECK_TOKEN",
+            payload: {
+                isLogin: true,
+                loading: false,
+            },
+        })
+    }
 }
 
 export const handleLogout = () => dispatch => {
