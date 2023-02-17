@@ -1,7 +1,10 @@
+import RegisterAdmin from "../Components/registerAdmin";
+
 const Register = () => {
     return (  
         <div>
-            <h1>Register</h1>
+            <RegisterAdmin/>
+            <h1> ini Register</h1>
         </div>
     );
 }
