@@ -10,7 +10,7 @@ import { Button } from "react-bootstrap";
 const EditCar = () => {
     const [name, setName] = useState("")
     const [price, setPrice] = useState("")
-    const [image, setImage] = useState(null)
+    const [image, setImage] = useState();
     const [category, setCategory] = useState("")
     const navigate = useNavigate()
     const [car, setCar] = useState({})
@@ -32,7 +32,7 @@ const EditCar = () => {
     const handleCategory = (e) => {
         setCategory(e.target.value)
     }
-
+  
  
 
     const handleSaveEditBtn = () => {
@@ -52,7 +52,8 @@ const EditCar = () => {
         axios
             .put(`https://bootcamp-rent-cars.herokuapp.com/admin/car/${id}`, formData, config)
             .then((ress) => {
-                // console.log(ress)
+                window.alert('Data Behasil Disimpan')
+
                 navigate("/list-car")
             })
             .catch((err) => console.log(err.message))
@@ -75,6 +76,11 @@ const EditCar = () => {
             .get(`https://bootcamp-rent-cars.herokuapp.com/admin/car/${id}`, config)
             .then((res) => {
                 setCar(res.data);
+                setName(res.data.name)
+                setPrice(res.data.price)
+                setImage(res.data.image)
+                setCategory(res.data.category)
+                console.log (res.data)
             })
             .catch((err) => console.log(err))
     
@@ -82,6 +88,8 @@ const EditCar = () => {
     
     const waktuCreate = new Date(car.createdAt).toLocaleDateString()
     const waktuUpdate = new Date(car.updatedAt).toLocaleDateString()
+
+    console.log (car)
 
     return (
         <SideBar isDboardActive={false} isCars={true}>
@@ -116,7 +124,7 @@ const EditCar = () => {
                                     <p>Nama/Tipe Mobil*</p>
                                 </div>
                                 <div className="editcar-inputsection-form-input-bg">
-                                    <input onChange={handleName} defaultValue={car.name}/>
+                                    <input onChange={handleName} defaultvalue={car.name} placeholder={car.name} required/>
                                 </div>
                             </div>
                             <div className="editcar-inputsection-form">
@@ -133,7 +141,8 @@ const EditCar = () => {
                                 </div>
                                 <div>
                                     <div className="editcar-inputsection-form-input-bg">
-                                        <input placeholder="Upload Foto Mobil" type="file" onChange={handleImage}  required/> <FiUpload size={18}/>
+                                        <input placeholder="Upload Foto Mobil" type="file" onChange={handleImage} required/> <FiUpload size={18}/>
+                                        
                                     </div>
                                     <div className="editcar-inputsection-form-instruc">
                                         <p>File size max. 2MB</p>

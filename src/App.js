@@ -11,9 +11,10 @@ import Register from './Pages/Register';
 const App = () => {
   return (
     <Routes>
-      <Route path='/admin-login' element={<Login />}/>
+      <Route path='/' element={<Login />}/>
       <Route path='/add-new-car' element={<AddCar />} />
-      <Route path='/edit-car' element={<EditCar />} />
+      <Route path='/edit-car/:id' element={<EditCar />} />
+
       <Route path='/dashboard' element={<Dashboard />} />
       <Route path='/list-car' element={<ListCar />} />
       <Route path='/' element={<Login />}/>

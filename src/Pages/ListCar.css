@@ -153,6 +153,63 @@
     font-size: 14px;
 }
 
+.modal-content {
+    width: 387px;
+    height: 333px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+.modal-body {
+    padding-top: 66px;  
+}
+
+.modal-body h4 {
+    font-family: 'Arial';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    padding-top: 24px;
+    padding-bottom: 14px;
+}
+
+.modal-footer{
+    display: flex;
+    justify-content: center;  
+}
+
+.button-ya Button {
+    background: #0D28A6;
+    border-radius: 2px;
+    width: 87px;
+    height: 36px;
+
+    font-family: 'Arial';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.button-tidak Button {
+    background: #FFFFFF;
+    border-radius: 2px;
+    width: 87px;
+    height: 36px;
+
+    color: #0D28A6;
+    font-family: 'Arial';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.modal-lg, .modal-xl {
+    --bs-modal-width: 500px;
+}
+
+
+
 
 
 

@@ -1,9 +1,8 @@
 import SimbolWaktu from '../Assets/Images/SimbolWaktu.png' 
 import SimbolUser from '../Assets/Images/SimbolUser.png' 
 import SimbolBreadcrumb from '../Assets/Images/Breadcrumb.png'
-
-
-import { useEffect, useState } from "react";
+import SimbolMobil from '../Assets/Images/SimbolMobil.png'
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import {API} from "../const/endpoint";
 import SideBar from "../Components/SideBar";
@@ -11,9 +10,16 @@ import { Link } from "react-router-dom";
 import "./ListCar.css"
 import { Breadcrumb, Button } from 'react-bootstrap';
 import { convertToRupiah } from '../utils/convertRupiah';
+//Modals//
+
+import Modal from 'react-bootstrap/Modal';
+
 
 
 const ListCar = () => {
+
+    const [modalShow, setModalShow] = React.useState(false);
+
     const [car, setCar] = useState([])
     const [err, setError] = useState ()
 
@@ -38,22 +44,7 @@ const ListCar = () => {
             .catch((err) => console.log(err.message))
     }
 
-    const handleDelete = async (id) => {
-        const token = localStorage.getItem("token");
-        const config = {
-            headers: {
-                access_token: token,
-            }
-        };
-        try {
-            const res = await axios.delete(
-                `https://bootcamp-rent-cars.herokuapp.com/admin/car/${id}`,
-                config)
-            getData()
-            } catch (error) {
-                setError(error.response.data.message)
-                }
-            }
+
     
     //Fungsi Kategori Small//
     const handleClickFilterSmall = () => {
@@ -85,7 +76,7 @@ const ListCar = () => {
         .catch((err) => console.log (err.message))
     }
 
-
+    console.log (car)
     
 
 
@@ -116,9 +107,9 @@ return (
         </div>
 
         <div className="discovery-card-bg">
-                {
-                    !!car.length ? car.map((item,i) => {
+                { !!car.length ? car.map((item,i) => {
                         return(
+                              
                             <div className="discovery-card" key={i}>
                                 <div className="discovery-card-img-bg">
                                     <img src={item.image} alt={item.name} className="discovery-card-img"/>
@@ -165,8 +156,19 @@ return (
                                 </div>
 
                                 <div className="discovery-card-button-bg">
+                                    
                                     <div>
-                                        <button onClick={() => handleDelete(item.id)} className="discovery-card-button-delete">Delete</button>
+                                        {/* <button onClick={() => handleDelete(item.id)} className="discovery-card-button-delete">Delete</button> */}
+                                        <Button className='discovery-card-button-delete' variant="primary" onClick={() => setModalShow(true)}>
+                                            Delete
+                                        </Button>
+
+                                        <MyVerticallyCenteredModal
+                                            show={modalShow}
+                                            onHide={() => setModalShow(false)}
+                                            id={item.id}
+                                            getData={getData}
+                                        />
                                     </div>
                                     <div>
                                         <Link to={`/edit-car/${item.id}`}> 
@@ -174,14 +176,82 @@ return (
                                         </Link>
                                     </div>
                                 </div>
+                                
                             </div>
+                            
                         )
                     }):(<h1>Loading...</h1>)
+                    
                 }
             </div>
     </SideBar>
 
 )
 }
+
+
+//MODALS//
+function MyVerticallyCenteredModal(props) {
+
+
+    const [err, setError] = useState ()
+
+    const handleDelete = async () => {
+        const token = localStorage.getItem("token");
+        const config = {
+            headers: {
+                access_token: token,
+            }
+        };
+        try {
+            const res = await axios
+            .delete(`https://bootcamp-rent-cars.herokuapp.com/admin/car/${props.id}`,
+                config)
+            props.onHide ()
+            props.getData()
+            window.alert ('Data Berhasil Dihapus')
+            
+            } catch (error) {
+                setError(error.response.data.message)
+                }
+            }
+        
+         
+    return (
+       
+      <Modal
+        {...props}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered>
+        
+        <Modal.Body>
+        <center><div> 
+          <img src={SimbolMobil}></img>
+        </div></center>
+          <center><h4>Menghapus Data Mobil</h4></center>
+          <center><p>
+          Setelah dihapus, data mobil tidak dapat dikembalikan. Yakin ingin menghapus?
+          </p></center>
+        </Modal.Body>
+
+       
+       <div className='modal-footer'> 
+            <div className='button-ya'> 
+                <Button onClick={handleDelete}>Ya</Button>    
+            </div>  
+            <div className='button-tidak'>    
+                <Button onClick={props.onHide}>Tidak</Button>  
+            </div>    
+        </div>
+        
+      
+          
+      </Modal>
+  
+    )
+  }
+
+
 
 export default ListCar
