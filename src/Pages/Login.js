@@ -5,7 +5,6 @@ const LoginPage = () => {
     return (  
         <div>
             <LoginAdmin />
-            <h1>ini loginnya</h1>
         </div>
     );
 }
