@@ -1,6 +1,7 @@
 import SimbolWaktu from '../Assets/Images/SimbolWaktu.png' 
 import SimbolUser from '../Assets/Images/SimbolUser.png' 
 import SimbolBreadcrumb from '../Assets/Images/Breadcrumb.png'
+import SimbolMobil from '../Assets/Images/SimbolMobil.png'
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import {API} from "../const/endpoint";
@@ -43,22 +44,7 @@ const ListCar = () => {
             .catch((err) => console.log(err.message))
     }
 
-    const handleDelete = async (id) => {
-        const token = localStorage.getItem("token");
-        const config = {
-            headers: {
-                access_token: token,
-            }
-        };
-        try {
-            const res = await axios
-            .delete(`https://bootcamp-rent-cars.herokuapp.com/admin/car/${id}`,
-                config)
-            getData()
-            } catch (error) {
-                setError(error.response.data.message)
-                }
-            }
+
     
     //Fungsi Kategori Small//
     const handleClickFilterSmall = () => {
@@ -90,7 +76,7 @@ const ListCar = () => {
         .catch((err) => console.log (err.message))
     }
 
-
+    console.log (car)
     
 
 
@@ -180,6 +166,8 @@ return (
                                         <MyVerticallyCenteredModal
                                             show={modalShow}
                                             onHide={() => setModalShow(false)}
+                                            id={item.id}
+                                            getData={getData}
                                         />
                                     </div>
                                     <div>
@@ -208,7 +196,7 @@ function MyVerticallyCenteredModal(props) {
 
     const [err, setError] = useState ()
 
-    const handleDelete = async (id) => {
+    const handleDelete = async () => {
         const token = localStorage.getItem("token");
         const config = {
             headers: {
@@ -217,8 +205,11 @@ function MyVerticallyCenteredModal(props) {
         };
         try {
             const res = await axios
-            .delete(`https://bootcamp-rent-cars.herokuapp.com/admin/car/${id}`,
+            .delete(`https://bootcamp-rent-cars.herokuapp.com/admin/car/${props.id}`,
                 config)
+            props.onHide ()
+            props.getData()
+            window.alert ('Data Berhasil Dihapus')
             
             } catch (error) {
                 setError(error.response.data.message)
@@ -226,7 +217,6 @@ function MyVerticallyCenteredModal(props) {
             }
         
          
-
     return (
        
       <Modal
@@ -236,17 +226,26 @@ function MyVerticallyCenteredModal(props) {
         centered>
         
         <Modal.Body>
-          <h4>Menghapus Data Mobil</h4>
-          <p>
+        <center><div> 
+          <img src={SimbolMobil}></img>
+        </div></center>
+          <center><h4>Menghapus Data Mobil</h4></center>
+          <center><p>
           Setelah dihapus, data mobil tidak dapat dikembalikan. Yakin ingin menghapus?
-          </p>
+          </p></center>
         </Modal.Body>
 
-        <Modal.Footer>
-          <Button onClick={props.onHide}>Ya</Button>
-          
-          <Button onClick={props.onHide}>Tidak</Button>     
-        </Modal.Footer>
+       
+       <div className='modal-footer'> 
+            <div className='button-ya'> 
+                <Button onClick={handleDelete}>Ya</Button>    
+            </div>  
+            <div className='button-tidak'>    
+                <Button onClick={props.onHide}>Tidak</Button>  
+            </div>    
+        </div>
+        
+      
           
       </Modal>
   

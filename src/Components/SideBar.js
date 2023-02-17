@@ -52,7 +52,7 @@ const SideBar = (props) => {
                                 <p className={props.isDboardActive ? "navsidebar-dashboard-p-active" : "navsidebar-dashboard-p"}>Dashboard</p>
                             </div>
                         </NavLink>
-                        <NavLink to="/cars" className={props.isCars ? "navsidebar-cars navsidebar-cars-active" : "navsidebar-cars"}>
+                        <NavLink to="/list-car" className={props.isCars ? "navsidebar-cars navsidebar-cars-active" : "navsidebar-cars"}>
                             <div>
                                 <FiTruck size={24} className="navsidebar-cars-icon"/>
                             </div>
