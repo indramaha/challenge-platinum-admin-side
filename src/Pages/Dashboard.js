@@ -51,10 +51,24 @@ const Dashboard = () => {
             .catch((err) => console.log(err.massage));
     }
 
-   
+    const handlePagination = (num) => {
+        const token = localStorage.getItem('token')
+        const config = {
+            headers: {
+                access_token: token,
+            }
+        }
+        axios
+            .get(`https://bootcamp-rent-cars.herokuapp.com/admin/v2/order?sort=created_at%3Adesc&page=${num}&pageSize=10`, config)
+            .then((res) => {
+                console.log(res.data.orders);
+                setCardata(res.data.orders);
+            })
+            .catch((err) => console.log(err.massage));
+    }
 
     return (
-        <SideBar>
+        <SideBar isDboardActive={true} isCars={false}>
             <div className="editcar-breadcrumb">
                 <div className="editcar-breadcrumb-route">
                     <p>Dashboard</p>
@@ -147,9 +161,9 @@ const Dashboard = () => {
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item" onClick={() => handlePagination(1)}><a class="page-link" >1</a></li>
+                    <li class="page-item" onClick={() => handlePagination(2)}><a class="page-link" >2</a></li>
+                    <li class="page-item" onClick={() => handlePagination(3)}><a class="page-link" >3</a></li>
                     <li class="page-item">
                         <a class="page-link" href="#" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
@@ -188,7 +202,7 @@ const Dashboard = () => {
             </div>
 
             <div className="go">
-            <button>Go</button>
+                <button>Go</button>
             </div>
             </div>
 
