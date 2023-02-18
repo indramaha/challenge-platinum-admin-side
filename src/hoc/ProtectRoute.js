@@ -18,7 +18,7 @@ const ProtectedRoute = () => {
         return("loading...")
     }
 
-    return state.auth.isLogin ? <Outlet /> : <Navigate to={'/'} />
+    return state.auth.isLogin ? <Outlet /> : <Navigate to={'/login'} />
 }
 
 export default ProtectedRoute;
