@@ -5,7 +5,7 @@ import { handleCheckToken } from "../redux/action/authAction";
 
 const ProtectedRoute = () => {
     const state = useSelector((rootReducers) => rootReducers)
-    console.log("hasil state",state)
+    // console.log("hasil state",state)
 
     const dispatch = useDispatch()
 

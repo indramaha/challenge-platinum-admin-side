@@ -3,8 +3,14 @@ import {FiHome, FiTruck, FiMenu, FiSearch} from "react-icons/fi"
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { NavLink } from "react-router-dom";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { handleActionCarFil } from "../redux/action/carAction";
 
 const SideBar = (props) => {
+    const [search, setSearch] = useState("")
+    const dispatch = useDispatch()
+
     function NavSideBarChild(){
         if (props.isDboardActive === true) {
             return(
@@ -34,6 +40,14 @@ const SideBar = (props) => {
     const handleLogOut = () => {
         localStorage.removeItem("token")
         window.location.reload(false)
+    }
+
+    const handleSearchInput = (e) => {
+        setSearch(e.target.value)
+    }
+
+    const handleSearchBtn = () => {
+        dispatch(handleActionCarFil(search))
     }
 
     return (  
@@ -73,10 +87,10 @@ const SideBar = (props) => {
                                 <div className="topnav-right-search">
                                     <div className="topnav-right-search-content">
                                         <FiSearch size={18}/>
-                                        <input placeholder="Search"/>
+                                        <input placeholder="Search" onChange={handleSearchInput}/>
                                     </div>
                                     <div className="topnav-right-search-btn">
-                                        <button>Search</button>
+                                        <button onClick={handleSearchBtn}>Search</button>
                                     </div>
                                 </div>
                                 <div className="topnav-right-account">

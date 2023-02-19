@@ -8,11 +8,12 @@ import {API} from "../const/endpoint";
 import SideBar from "../Components/SideBar";
 import { Link } from "react-router-dom";
 import "./ListCar.css"
-import { Breadcrumb, Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { convertToRupiah } from '../utils/convertRupiah';
 //Modals//
 
 import Modal from 'react-bootstrap/Modal';
+import { useSelector } from 'react-redux';
 
 
 
@@ -21,11 +22,17 @@ const ListCar = () => {
     const [modalShow, setModalShow] = React.useState(false);
 
     const [car, setCar] = useState([])
-    const [err, setError] = useState ()
+    // const [err, setError] = useState ()
+    const state = useSelector(rootReducers => rootReducers)
+    // console.log(state);
 
-    useEffect (() => {
+    useEffect(() => {
         getData();
-    }, [])
+    },[])
+
+    useEffect(() => {
+        setCar(state.car.carList)
+    },[state.car.carList])
 
     const getData = () => {
         const token = localStorage.getItem("token");
@@ -38,7 +45,7 @@ const ListCar = () => {
         axios
             .get(API.GET_CARS_ADMIN, config)
             .then((ress) => {
-                console.log(ress.data.cars)
+                // console.log(ress.data.cars)
                 setCar(ress.data.cars)
             })
             .catch((err) => console.log(err.message))
@@ -76,13 +83,10 @@ const ListCar = () => {
         .catch((err) => console.log (err.message))
     }
 
-    console.log (car)
-    
-
-
+    // console.log (car)
 return (  
     <SideBar isDboardActive={false} isCars={true}>
-        <img className='simbol-breadcrumb' src={SimbolBreadcrumb}/>
+        <img className='simbol-breadcrumb' src={SimbolBreadcrumb} alt='symbol'/>
         <div className='judul-list-car'> 
             <div className='judul-list-car-card'>List Car </div>
             <div>
@@ -109,7 +113,6 @@ return (
         <div className="discovery-card-bg">
                 { !!car.length ? car.map((item,i) => {
                         return(
-                              
                             <div className="discovery-card" key={i}>
                                 <div className="discovery-card-img-bg">
                                     <img src={item.image} alt={item.name} className="discovery-card-img"/>
@@ -123,23 +126,23 @@ return (
                                 
                                 <div className="discovery-card-category">
                                     <div>
-                                        <img className='simbol-user' src={SimbolUser} />
+                                        <img className='simbol-user' src={SimbolUser} alt='symbol'/>
                                     </div>
                                     <div> 
                                         {(() => {
-                                            if (item.category == 'small') {
+                                            if (item.category === 'small') {
                                             return (
                                                 <div>
                                                     <p>2-4 orang</p>
                                                 </div>
                                             )
-                                            } else if (item.category == 'Medium') {
+                                            } else if (item.category === 'Medium') {
                                             return (
                                                 <div>
                                                     <p>4-6 orang</p>
                                                 </div>
                                             )
-                                            } else if (item.category == 'large') {
+                                            } else if (item.category === 'large') {
                                             return (
                                                 <div>
                                                     <p>6-8 orang</p>
@@ -151,7 +154,7 @@ return (
                                 </div>
 
                                 <div className='discovery-card-waktu-update'>
-                                    <div>  <img className='simbol-waktu' src={SimbolWaktu} />  </div>  
+                                    <div>  <img className='simbol-waktu' src={SimbolWaktu} alt='symbol'/>  </div>  
                                     <div> <p className="discovery-card-updateAt"> Updated at {new Date(item.updatedAt).toLocaleDateString()} </p> </div>
                                 </div>
 
@@ -204,53 +207,42 @@ function MyVerticallyCenteredModal(props) {
             }
         };
         try {
-            const res = await axios
-            .delete(`https://bootcamp-rent-cars.herokuapp.com/admin/car/${props.id}`,
-                config)
+            const res = await axios.delete(`https://bootcamp-rent-cars.herokuapp.com/admin/car/${props.id}`, config)
             props.onHide ()
             props.getData()
             window.alert ('Data Berhasil Dihapus')
-            
-            } catch (error) {
-                setError(error.response.data.message)
-                }
-            }
-        
-         
+        } catch (error) {
+            setError(error.response.data.message)
+        }
+    }
     return (
-       
-      <Modal
-        {...props}
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered>
-        
-        <Modal.Body>
-        <center><div> 
-          <img src={SimbolMobil}></img>
-        </div></center>
-          <center><h4>Menghapus Data Mobil</h4></center>
-          <center><p>
-          Setelah dihapus, data mobil tidak dapat dikembalikan. Yakin ingin menghapus?
-          </p></center>
-        </Modal.Body>
+        <Modal
+            {...props}
+            size="lg"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered>
+            
+            <Modal.Body>
+            <center><div> 
+            <img src={SimbolMobil} alt='symbol'></img>
+            </div></center>
+            <center><h4>Menghapus Data Mobil</h4></center>
+            <center><p>
+            Setelah dihapus, data mobil tidak dapat dikembalikan. Yakin ingin menghapus?
+            </p></center>
+            </Modal.Body>
 
-       
-       <div className='modal-footer'> 
-            <div className='button-ya'> 
-                <Button onClick={handleDelete}>Ya</Button>    
-            </div>  
-            <div className='button-tidak'>    
-                <Button onClick={props.onHide}>Tidak</Button>  
-            </div>    
-        </div>
-        
-      
-          
-      </Modal>
-  
+            <div className='modal-footer'> 
+                <div className='button-ya'> 
+                    <Button onClick={handleDelete}>Ya</Button>    
+                </div>  
+                <div className='button-tidak'>    
+                    <Button onClick={props.onHide}>Tidak</Button>  
+                </div>    
+            </div>
+        </Modal>
     )
-  }
+}
 
 
 

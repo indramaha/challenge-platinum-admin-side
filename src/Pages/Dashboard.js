@@ -5,8 +5,8 @@ import { Bar } from "react-chartjs-2"
 import { orderList } from "../Components/Orderdata";
 import {
     CategoryScale,
-    LinearScale,
-    BarElement,
+    // LinearScale,
+    // BarElement,
 } from 'chart.js';
 
 import { Chart } from 'chart.js/auto';
@@ -45,7 +45,7 @@ const Dashboard = () => {
         axios
             .get("https://bootcamp-rent-cars.herokuapp.com/admin/v2/order?sort=created_at%3Adesc&page=1&pageSize=10", config)
             .then((res) => {
-                console.log(res.data.orders);
+                // console.log(res.data.orders);
                 setCardata(res.data.orders);
             })
             .catch((err) => console.log(err.massage));
@@ -61,7 +61,7 @@ const Dashboard = () => {
         axios
             .get(`https://bootcamp-rent-cars.herokuapp.com/admin/v2/order?sort=created_at%3Adesc&page=${num}&pageSize=10`, config)
             .then((res) => {
-                console.log(res.data.orders);
+                // console.log(res.data.orders);
                 setCardata(res.data.orders);
             })
             .catch((err) => console.log(err.massage));
